@@ -1,7 +1,7 @@
 The Hidden Cost of War
 =======
 
-Many people don't realize (or rarely consider) that the cost of war isn't just the number of men/women lost.
+Many people don't realize (or rarely consider) that the cost of war isn't just about the casualties.
 
 Truely, there are so many casualties of war:
 
