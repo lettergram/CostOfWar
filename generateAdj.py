@@ -1,6 +1,10 @@
 
 import csv
 
+'''
+ Parses the input file for calculating the cost of war
+ Start Year of War, Total Battle Field Deaths, Year, Per Capita GDP, Adjusted Woman Fertility
+'''
 def parseFile(file):
     file = open(file, 'rU')
     adjFile = csv.reader(file, delimiter=',')
@@ -10,9 +14,9 @@ def parseFile(file):
     adjFertility = {}
 
     for row in adjFile:
-        if not deaths.has_key(row[0]):     # If dictionary already contains war year
-            deaths[int(row[0])] = 0             # Initialize the death count
-        deaths[int(row[0])] += int(row[1])      # Add to death count
+        if not deaths.has_key(row[0]):        # If dictionary already contains war year
+            deaths[int(row[0])] = 0           # Initialize the death count
+        deaths[int(row[0])] += int(row[1])    # Add to death count
 
         if row[2] is not "":
             perCapitaGDP[int(row[2])] = int(row[3])
@@ -41,13 +45,28 @@ def calc_single_war_cost(year, deaths, capitaGDP, adjFert):
     return total
 
 
+'''
+ Caluclates the total cost
+'''
 def calc_total_war_cost(deaths, capitaGDP, adjFert):
     total = 0.0
+    yearlyCosts = {}
     for year in deaths:
         totalYear = calc_single_war_cost(year, deaths[year], capitaGDP, adjFert)
-        print year, totalYear
+        yearlyCosts[year] = totalYear
         total += totalYear
+    writeCosts(yearlyCosts)
     return total
+
+
+'''
+ Ouputs the yearly cost in a csv file
+'''
+def writeCosts(yearlyCost):
+    file = open('yearly_adj_war_cost.csv', 'w')
+    file.write('Year,Cost of Wars\n')
+    for year in yearlyCost:
+        file.write(str(year) + ',' + str(yearlyCost[year]) + '\n')
 
 deaths, perCapitaGDP, adjFertility  = parseFile('Adjusted-War-Cost.csv')
 
