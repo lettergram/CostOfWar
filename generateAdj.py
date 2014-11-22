@@ -103,8 +103,3 @@ deaths, perCapitaGDP, adjFertility  = parseFile('Adjusted-War-Cost.csv')
 
 totalGDP = calc_total_war_cost(deaths, perCapitaGDP, adjFertility)
 print "total GDP lost", totalGDP
-
-
-
-
-
