@@ -38,12 +38,12 @@ def calc_single_war_cost(year, deaths, capitaGDP, adjFert):
     for i in range(0, gen):
         total += capitaGDP[year + i] * deaths
 
-    if (year + 25) < 2007:
+    if (year + gen) < 2007:
         births = 0.0
-        for i in range(0, 25):
+        for i in range(0, gen):
             births += (float(deaths) * adjFert[year+i])
-        lostBirths = int(births / 25.0)
-        year += 25
+        lostBirths = int(births / float(gen))
+        year += gen
         return total + calc_single_war_cost(year, lostBirths, capitaGDP, adjFert)
     return total
 
